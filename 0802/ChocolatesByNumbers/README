@@ -1,0 +1,45 @@
+# ChocolatesByNumbers
+
+## 문제 설명
+Two positive integers N and M are given. Integer N represents the number of chocolates arranged in a circle, numbered from 0 to N − 1.
+You start to eat the chocolates. After eating a chocolate you leave only a wrapper.
+You begin with eating chocolate number 0. Then you omit the next M − 1 chocolates or wrappers on the circle, and eat the following one.
+More precisely, if you ate chocolate number X, then you will next eat the chocolate with number (X + M) modulo N (remainder of division).
+You stop eating when you encounter an empty wrapper.
+For example, given integers N = 10 and M = 4. You will eat the following chocolates: 0, 4, 8, 2, 6.
+The goal is to count the number of chocolates that you will eat, following the above rules.
+
+Write a function:
+function solution(N, M);
+that, given two positive integers N and M, returns the number of chocolates that you will eat.
+
+For example, given integers N = 10 and M = 4. the function should return 5, as explained above.
+Write an efficient algorithm for the following assumptions:
+N and M are integers within the range [1..1,000,000,000].
+
+
+## 문제 풀이
+* JavaScript
+
+N과 M의 최대 공약수를 구해 N보다 작거나 같은 수의 배수를 구한다.
+최대 공약수를 구하는 가장 효율적인 방법인 [유클리드 호제법](https://sustainable-dev.tistory.com/36?category=811590)을 사용했다.
+
+## 문제
+```javascript
+function solution(N, M) {
+    if(N === 1) return 1;
+
+    let result = getUcl(N, M);
+    return parseInt(N / result)
+
+}
+
+function getUcl(X, Y) {
+    if(Y === 0) return X
+    
+    return getUcl(Y, X % Y)
+}
+```
+
+## 출처
+Codility
